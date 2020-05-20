@@ -1,0 +1,35 @@
+@import 'styles/variables';
+
+.container {
+  height: 100%;
+  overflow: auto;
+  background: url('./../../images/guitar.svg');
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: bottom;
+}
+
+.auth {
+  max-width: 320px;
+  margin: $xxl auto;
+}
+
+.form {
+  margin-top: $xxl;
+}
+
+.inputContainer {
+  margin-bottom: $l;
+}
+
+.subtext {
+  text-align: center;
+  font-size: $small;
+  margin: 0;
+  padding: $s 0;
+  background: #fff;
+}
+
+.guitar {
+  position: absolute;
+}

@@ -1,9 +1,18 @@
 import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import Auth from 'pages/Auth';
 
 function App() {
   return (
-    <div className="App">
-    </div>
+    <Switch>
+      <Route exact path="/signin">
+        <Auth />
+      </Route>
+      <Route exact path="/signup">
+        <Auth signup />
+      </Route>
+      <Redirect to="/signin" />
+    </Switch>
   );
 }
 

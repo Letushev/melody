@@ -1,0 +1,10 @@
+@import 'styles/variables';
+
+.name {
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: $ffName;
+  font-size: $xl;
+  color: $blue;
+}

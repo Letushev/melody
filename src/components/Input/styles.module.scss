@@ -1,0 +1,46 @@
+@import 'styles/variables';
+
+.input {
+  width: 100%;
+  padding: $s;
+
+  background: #fff;
+  border: 1px solid $tundora;
+
+  font-family: $ffText;
+  font-size: $small;
+  color: $mineShaft;
+
+  &.invalid {
+    border-color: $red;
+  
+    &:focus {
+      outline-color: $red;
+    }
+  }
+}
+
+.label {
+  display: block;
+  margin-bottom: $s;
+  font-size: $medium;
+
+  &.invalid {
+    color: $red;
+  }
+}
+
+.container {
+  position: relative;
+}
+
+.invalidText {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin: 0 0 0 $m;
+  width: 240px;
+
+  font-family: $ffCursive;
+  font-size: $medium;
+}

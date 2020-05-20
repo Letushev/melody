@@ -1,0 +1,21 @@
+@import 'styles/variables';
+
+.button {
+  width: 100%;
+  padding: $m;
+  background: $blue;
+  border: 1px solid $blue;
+  
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: $ffText;
+  font-size: $medium;
+  font-weight: 300;
+  color: #fff;
+
+  cursor: pointer;
+
+  &:hover {
+    background: $blueRegal
+  }
+}
