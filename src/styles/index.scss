@@ -1,0 +1,15 @@
+@import 'styles/variables';
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: $ffText;
+    color: $colorText;
+}
