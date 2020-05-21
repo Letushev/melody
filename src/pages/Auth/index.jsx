@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import Name from 'components/Name';
 import Input from 'components/Input';
 import Button from 'components/Button';
+import { fetchGQL } from 'api';
 import styles from './styles.module.scss';
 import { isPasswordCorrect } from './helpers';
+import * as gql from './gql';
 
 export default function Auth({ signup }) {
   const baseConfig = {
@@ -16,11 +18,13 @@ export default function Auth({ signup }) {
   const [nickname, setNickname] = useState(baseConfig);
   const [password, setPassword] = useState(baseConfig);
   const [isChecking, setChecking] = useState(false);
+  const [errorMsgs, setErrorMsgs] = useState([]);
 
   useEffect(() => {
     setPassword(baseConfig);
     setNickname(baseConfig);
     setChecking(false);
+    setErrorMsgs([]);
   }, [signup]);
 
   useEffect(() => {
@@ -45,8 +49,42 @@ export default function Auth({ signup }) {
 
   const onSubmitForm = event => {
     event.preventDefault();
-    // try to signin or signup
     setChecking(true);
+
+    if (signup && (nickname.value.length < 4 || !isPasswordCorrect(password.value))) {
+      return;
+    }
+
+    const credentials = {
+      nickname: nickname.value,
+      password: password.value,
+    };
+    
+    if (signup) {
+      fetchGQL({
+        operation: gql.signup,
+        ...credentials,
+      })
+        .then(({ data, errors }) => {
+          if (errors) {
+            setErrorMsgs(errors.map(e => e.message));
+          } else {
+            localStorage.setItem('authToken', data.signup.token);
+          }
+        });
+    } else {
+      fetchGQL({
+        operation: gql.login,
+        ...credentials,
+      })
+        .then(({ data, errors }) => {
+          if (errors) {
+            setErrorMsgs(errors.map(e => e.message));
+          } else {
+            localStorage.setItem('authToken', data.login.token);
+          }
+        })
+    }
   };
 
   return (
@@ -67,6 +105,7 @@ export default function Auth({ signup }) {
             minLength="4"
             maxLength="48"
             containerStyles={styles.inputContainer}
+            invalidTextStyles={styles.invalidText}
           />
           <Input
             type="password"
@@ -79,6 +118,7 @@ export default function Auth({ signup }) {
             minLength="8"
             maxLength="48"
             containerStyles={styles.inputContainer}
+            invalidTextStyles={styles.invalidText}
           />
           <Button type="submit">
             { signup ? 'Зареєструватися' : 'Увійти' }
@@ -99,6 +139,19 @@ export default function Auth({ signup }) {
                 )
             }
           </p>
+          {
+            !!errorMsgs.length && (
+              <ul className={styles.errors}>
+                {
+                  errorMsgs.map((error, i) => (
+                    <li key={i}>
+                      {error}
+                    </li>
+                  ))
+                }
+              </ul>
+            )
+          }
         </form>
       </div>
     </div>

@@ -12,6 +12,12 @@
 .auth {
   max-width: 320px;
   margin: $xxl auto;
+  padding: $m;
+  background: #fff;
+
+  @media (max-width: 1024px) {
+    border: 1px solid $blue;
+  }
 }
 
 .form {
@@ -27,9 +33,27 @@
   font-size: $small;
   margin: 0;
   padding: $s 0;
-  background: #fff;
 }
 
 .guitar {
   position: absolute;
+}
+
+.errors {
+  padding: $s;
+  margin: 0;
+  list-style-position: inside;
+  
+  li {
+    color: $red;
+  }
+}
+
+.invalidText {
+  @media (max-width: 1024px) {
+    position: relative;
+    left: 0;
+    width: 100%;
+    margin: $m 0 0 0;
+  }
 }

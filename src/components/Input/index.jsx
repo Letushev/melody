@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 export default function Input({
   value, onChange, name,
   label, invalid, containerStyles,
-  invalidText, ...props
+  invalidText, invalidTextStyles, ...props
 }) {
   return (
     <div className={cn(
@@ -35,7 +35,10 @@ export default function Input({
       />
       {
         (invalid && invalidText) && (
-          <p className={styles.invalidText}>
+          <p className={cn(
+            styles.invalidText,
+            invalidTextStyles
+          )}>
             {invalidText}
           </p>
         )
@@ -52,11 +55,13 @@ Input.propTypes = {
   invalid: PropTypes.bool,
   containerStyles: PropTypes.string,
   invalidText: PropTypes.string,
+  invalidTextStyles: PropTypes.string,
 };
 
 Input.defaultProps = {
   label: '',
   invalid: false,
-  containerStyles: null,
+  containerStyles: '',
   invalidText: '',
+  invalidTextStyles: '',
 };
