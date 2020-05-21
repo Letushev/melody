@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Name from 'components/Name';
 import Input from 'components/Input';
@@ -10,6 +10,7 @@ import { isPasswordCorrect } from './helpers';
 import * as gql from './gql';
 
 export default function Auth({ signup }) {
+  let history = useHistory();
   const baseConfig = {
     value: '',
     invalid: false
@@ -59,33 +60,26 @@ export default function Auth({ signup }) {
       nickname: nickname.value,
       password: password.value,
     };
-    
-    if (signup) {
-      fetchGQL({
-        operation: gql.signup,
-        ...credentials,
-      })
-        .then(({ data, errors }) => {
-          if (errors) {
-            setErrorMsgs(errors.map(e => e.message));
-          } else {
-            localStorage.setItem('authToken', data.signup.token);
-          }
-        });
-    } else {
-      fetchGQL({
-        operation: gql.login,
-        ...credentials,
-      })
-        .then(({ data, errors }) => {
-          if (errors) {
-            setErrorMsgs(errors.map(e => e.message));
-          } else {
-            localStorage.setItem('authToken', data.login.token);
-          }
-        })
-    }
+
+    const type = signup ? 'signup' : 'login';
+
+    fetchGQL({
+      operation: gql[type],
+      ...credentials,
+    })
+      .then(({ data, errors }) => {
+        if (errors) {
+          setErrorMsgs(errors.map(e => e.message));
+        } else {
+          localStorage.setItem('authToken', data[type].token);
+          history.push('/my-melodies');
+        }
+      });
   };
+
+  if (!!localStorage.getItem('authToken')) {
+    return <Redirect to="/my-melodies" />;
+  }
 
   return (
     <div className={styles.container}>

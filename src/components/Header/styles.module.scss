@@ -1,0 +1,39 @@
+@import 'styles/variables';
+
+.header {
+  padding: $s $l;
+}
+
+.inner {
+  margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.nav {
+  list-style: none;
+  height: 100%;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.link {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 $l;
+  text-transform: uppercase;
+  color: $mineShaft;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.activeLink {
+  border: 1px solid $blue;
+  color: $blue;
+}

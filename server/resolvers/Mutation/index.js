@@ -34,7 +34,13 @@ async function login(_, args, context) {
   };
 }
 
+async function deleteUser(_, args, context) {
+  return await context.prisma.deleteUser({ id: args.id });
+}
+
 module.exports = {
   signup,
   login,
+
+  deleteUser,
 };
