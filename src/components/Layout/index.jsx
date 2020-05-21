@@ -11,7 +11,9 @@ export default function Layout({ content: Content, authProtected }) {
   return (
     <>
       <Header />
-      <Content />
+      <div className="maxWidth">
+        <Content />
+      </div>
     </>
   )
 }

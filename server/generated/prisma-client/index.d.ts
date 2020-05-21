@@ -107,7 +107,9 @@ export type UserOrderByInput =
   | "nickname_ASC"
   | "nickname_DESC"
   | "password_ASC"
-  | "password_DESC";
+  | "password_DESC"
+  | "image_ASC"
+  | "image_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
@@ -159,6 +161,20 @@ export interface UserWhereInput {
   password_not_starts_with?: Maybe<String>;
   password_ends_with?: Maybe<String>;
   password_not_ends_with?: Maybe<String>;
+  image?: Maybe<String>;
+  image_not?: Maybe<String>;
+  image_in?: Maybe<String[] | String>;
+  image_not_in?: Maybe<String[] | String>;
+  image_lt?: Maybe<String>;
+  image_lte?: Maybe<String>;
+  image_gt?: Maybe<String>;
+  image_gte?: Maybe<String>;
+  image_contains?: Maybe<String>;
+  image_not_contains?: Maybe<String>;
+  image_starts_with?: Maybe<String>;
+  image_not_starts_with?: Maybe<String>;
+  image_ends_with?: Maybe<String>;
+  image_not_ends_with?: Maybe<String>;
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
   OR?: Maybe<UserWhereInput[] | UserWhereInput>;
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
@@ -168,16 +184,19 @@ export interface UserCreateInput {
   id?: Maybe<ID_Input>;
   nickname: String;
   password: String;
+  image?: Maybe<String>;
 }
 
 export interface UserUpdateInput {
   nickname?: Maybe<String>;
   password?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface UserUpdateManyMutationInput {
   nickname?: Maybe<String>;
   password?: Maybe<String>;
+  image?: Maybe<String>;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -199,12 +218,14 @@ export interface User {
   id: ID_Output;
   nickname: String;
   password: String;
+  image?: String;
 }
 
 export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
   nickname: () => Promise<String>;
   password: () => Promise<String>;
+  image: () => Promise<String>;
 }
 
 export interface UserSubscription
@@ -213,6 +234,7 @@ export interface UserSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   nickname: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
+  image: () => Promise<AsyncIterator<String>>;
 }
 
 export interface UserNullablePromise
@@ -221,6 +243,7 @@ export interface UserNullablePromise
   id: () => Promise<ID_Output>;
   nickname: () => Promise<String>;
   password: () => Promise<String>;
+  image: () => Promise<String>;
 }
 
 export interface UserConnection {
@@ -345,6 +368,7 @@ export interface UserPreviousValues {
   id: ID_Output;
   nickname: String;
   password: String;
+  image?: String;
 }
 
 export interface UserPreviousValuesPromise
@@ -353,6 +377,7 @@ export interface UserPreviousValuesPromise
   id: () => Promise<ID_Output>;
   nickname: () => Promise<String>;
   password: () => Promise<String>;
+  image: () => Promise<String>;
 }
 
 export interface UserPreviousValuesSubscription
@@ -361,6 +386,7 @@ export interface UserPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   nickname: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
+  image: () => Promise<AsyncIterator<String>>;
 }
 
 /*

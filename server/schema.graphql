@@ -1,17 +1,18 @@
 type Query {
-  test: String
+  user: User
 }
 
 type Mutation {
   signup(nickname: String!, password: String!): AuthPayload
   login(nickname: String!, password: String!): AuthPayload
-  
   deleteUser(id: ID!): User
+  addUserImage(image: String!): User
 }
 
 type User {
   id: ID!
   nickname: String!
+  image: String
 }
 
 type AuthPayload {

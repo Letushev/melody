@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { APP_SECRET } = require('../../utils');
+const { APP_SECRET, getUserId } = require('../../utils');
 
 async function signup(_, args, context) {
   const hashedPassword = await bcrypt.hash(args.password, 10);
@@ -38,9 +38,21 @@ async function deleteUser(_, args, context) {
   return await context.prisma.deleteUser({ id: args.id });
 }
 
+async function addUserImage(_, args, context) {
+  const id = getUserId(context);
+  return await context.prisma.updateUser({
+    data: {
+      image: args.image,
+    },
+    where: {
+      id: id,
+    }
+  });
+}
+
 module.exports = {
   signup,
   login,
-
   deleteUser,
+  addUserImage,
 };

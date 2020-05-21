@@ -4,7 +4,7 @@
   width: 100%;
   padding: $m;
   background: $blue;
-  border: 1px solid $blue;
+  border: none;
   
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -17,5 +17,17 @@
 
   &:hover {
     background: $blueRegal
+  }
+}
+
+.auto {
+  width: auto;
+}
+
+.negative {
+  background: $red;
+
+  &:hover {
+    background: $grenadier;
   }
 }

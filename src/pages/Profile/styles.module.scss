@@ -1,0 +1,29 @@
+@import 'styles/variables';
+
+.container {
+  max-width: 280px;
+  margin: $xxl auto;
+}
+
+.avatar {
+  display: block;
+  width: 124px;
+  height: 124px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+.nickname {
+  text-align: center;
+}

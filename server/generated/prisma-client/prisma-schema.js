@@ -54,6 +54,7 @@ type User {
   id: ID!
   nickname: String!
   password: String!
+  image: String
 }
 
 type UserConnection {
@@ -66,6 +67,7 @@ input UserCreateInput {
   id: ID
   nickname: String!
   password: String!
+  image: String
 }
 
 type UserEdge {
@@ -80,12 +82,15 @@ enum UserOrderByInput {
   nickname_DESC
   password_ASC
   password_DESC
+  image_ASC
+  image_DESC
 }
 
 type UserPreviousValues {
   id: ID!
   nickname: String!
   password: String!
+  image: String
 }
 
 type UserSubscriptionPayload {
@@ -109,11 +114,13 @@ input UserSubscriptionWhereInput {
 input UserUpdateInput {
   nickname: String
   password: String
+  image: String
 }
 
 input UserUpdateManyMutationInput {
   nickname: String
   password: String
+  image: String
 }
 
 input UserWhereInput {
@@ -159,6 +166,20 @@ input UserWhereInput {
   password_not_starts_with: String
   password_ends_with: String
   password_not_ends_with: String
+  image: String
+  image_not: String
+  image_in: [String!]
+  image_not_in: [String!]
+  image_lt: String
+  image_lte: String
+  image_gt: String
+  image_gte: String
+  image_contains: String
+  image_not_contains: String
+  image_starts_with: String
+  image_not_starts_with: String
+  image_ends_with: String
+  image_not_ends_with: String
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]

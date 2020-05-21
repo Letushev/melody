@@ -43,6 +43,7 @@ export default function Header() {
                     to={el.link}
                     className={styles.link}
                     activeClassName={styles.activeLink}
+                    onClick={() => setSidebar(false)}
                   >
                     {el.label}
                   </NavLink>

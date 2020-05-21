@@ -2,4 +2,5 @@ type User {
   id: ID! @id
   nickname: String! @unique
   password: String!
+  image: String
 }
