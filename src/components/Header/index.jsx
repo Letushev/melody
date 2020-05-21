@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import Name from 'components/Name';
 import cn from 'classnames';
+import Name from 'components/Name';
+import { ReactComponent as MenuSVG } from 'images/menu.svg';
+import { ReactComponent as CloseSVG } from 'images/close.svg';
 import styles from './styles.module.scss';
 
 export default function Header() {
@@ -11,12 +13,29 @@ export default function Header() {
     { link: '/profile', label: 'Профіль' },
   ];
 
+  const [sidebar, setSidebar] = useState(false);
+
   return (
     <header className={styles.header}>
       <div className={cn(styles.inner, "maxWidth")}>
+        <MenuSVG
+          className={styles.menu}
+          onClick={() => setSidebar(true)}
+        />
         <Name />
-        <nav>
-          <ul className={styles.nav}>
+        <nav className={cn(
+          styles.nav,
+          sidebar && styles.sidebar
+        )}>
+          { 
+            sidebar && (
+              <CloseSVG
+                className={styles.close} 
+                onClick={() => setSidebar(false)}
+              />
+            ) 
+          }
+          <ul className={styles.list}>
             {
               nav.map(el => (
                 <li key={el.link}>
