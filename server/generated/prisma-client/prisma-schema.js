@@ -3,7 +3,11 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateUser {
+/* GraphQL */ `type AggregateMelody {
+  count: Int!
+}
+
+type AggregateUser {
   count: Int!
 }
 
@@ -11,9 +15,256 @@ type BatchPayload {
   count: Long!
 }
 
+scalar DateTime
+
 scalar Long
 
+type Melody {
+  id: ID!
+  name: String!
+  by: String!
+  createdBy: User!
+  createdAt: DateTime!
+}
+
+type MelodyConnection {
+  pageInfo: PageInfo!
+  edges: [MelodyEdge]!
+  aggregate: AggregateMelody!
+}
+
+input MelodyCreateInput {
+  id: ID
+  name: String!
+  by: String!
+  createdBy: UserCreateOneWithoutMelodiesInput!
+}
+
+input MelodyCreateManyWithoutCreatedByInput {
+  create: [MelodyCreateWithoutCreatedByInput!]
+  connect: [MelodyWhereUniqueInput!]
+}
+
+input MelodyCreateWithoutCreatedByInput {
+  id: ID
+  name: String!
+  by: String!
+}
+
+type MelodyEdge {
+  node: Melody!
+  cursor: String!
+}
+
+enum MelodyOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  by_ASC
+  by_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type MelodyPreviousValues {
+  id: ID!
+  name: String!
+  by: String!
+  createdAt: DateTime!
+}
+
+input MelodyScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  by: String
+  by_not: String
+  by_in: [String!]
+  by_not_in: [String!]
+  by_lt: String
+  by_lte: String
+  by_gt: String
+  by_gte: String
+  by_contains: String
+  by_not_contains: String
+  by_starts_with: String
+  by_not_starts_with: String
+  by_ends_with: String
+  by_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  AND: [MelodyScalarWhereInput!]
+  OR: [MelodyScalarWhereInput!]
+  NOT: [MelodyScalarWhereInput!]
+}
+
+type MelodySubscriptionPayload {
+  mutation: MutationType!
+  node: Melody
+  updatedFields: [String!]
+  previousValues: MelodyPreviousValues
+}
+
+input MelodySubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: MelodyWhereInput
+  AND: [MelodySubscriptionWhereInput!]
+  OR: [MelodySubscriptionWhereInput!]
+  NOT: [MelodySubscriptionWhereInput!]
+}
+
+input MelodyUpdateInput {
+  name: String
+  by: String
+  createdBy: UserUpdateOneRequiredWithoutMelodiesInput
+}
+
+input MelodyUpdateManyDataInput {
+  name: String
+  by: String
+}
+
+input MelodyUpdateManyMutationInput {
+  name: String
+  by: String
+}
+
+input MelodyUpdateManyWithoutCreatedByInput {
+  create: [MelodyCreateWithoutCreatedByInput!]
+  delete: [MelodyWhereUniqueInput!]
+  connect: [MelodyWhereUniqueInput!]
+  set: [MelodyWhereUniqueInput!]
+  disconnect: [MelodyWhereUniqueInput!]
+  update: [MelodyUpdateWithWhereUniqueWithoutCreatedByInput!]
+  upsert: [MelodyUpsertWithWhereUniqueWithoutCreatedByInput!]
+  deleteMany: [MelodyScalarWhereInput!]
+  updateMany: [MelodyUpdateManyWithWhereNestedInput!]
+}
+
+input MelodyUpdateManyWithWhereNestedInput {
+  where: MelodyScalarWhereInput!
+  data: MelodyUpdateManyDataInput!
+}
+
+input MelodyUpdateWithoutCreatedByDataInput {
+  name: String
+  by: String
+}
+
+input MelodyUpdateWithWhereUniqueWithoutCreatedByInput {
+  where: MelodyWhereUniqueInput!
+  data: MelodyUpdateWithoutCreatedByDataInput!
+}
+
+input MelodyUpsertWithWhereUniqueWithoutCreatedByInput {
+  where: MelodyWhereUniqueInput!
+  update: MelodyUpdateWithoutCreatedByDataInput!
+  create: MelodyCreateWithoutCreatedByInput!
+}
+
+input MelodyWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  by: String
+  by_not: String
+  by_in: [String!]
+  by_not_in: [String!]
+  by_lt: String
+  by_lte: String
+  by_gt: String
+  by_gte: String
+  by_contains: String
+  by_not_contains: String
+  by_starts_with: String
+  by_not_starts_with: String
+  by_ends_with: String
+  by_not_ends_with: String
+  createdBy: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  AND: [MelodyWhereInput!]
+  OR: [MelodyWhereInput!]
+  NOT: [MelodyWhereInput!]
+}
+
+input MelodyWhereUniqueInput {
+  id: ID
+}
+
 type Mutation {
+  createMelody(data: MelodyCreateInput!): Melody!
+  updateMelody(data: MelodyUpdateInput!, where: MelodyWhereUniqueInput!): Melody
+  updateManyMelodies(data: MelodyUpdateManyMutationInput!, where: MelodyWhereInput): BatchPayload!
+  upsertMelody(where: MelodyWhereUniqueInput!, create: MelodyCreateInput!, update: MelodyUpdateInput!): Melody!
+  deleteMelody(where: MelodyWhereUniqueInput!): Melody
+  deleteManyMelodies(where: MelodyWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -40,6 +291,9 @@ type PageInfo {
 }
 
 type Query {
+  melody(where: MelodyWhereUniqueInput!): Melody
+  melodies(where: MelodyWhereInput, orderBy: MelodyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Melody]!
+  melodiesConnection(where: MelodyWhereInput, orderBy: MelodyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MelodyConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -47,6 +301,7 @@ type Query {
 }
 
 type Subscription {
+  melody(where: MelodySubscriptionWhereInput): MelodySubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
@@ -55,6 +310,7 @@ type User {
   nickname: String!
   password: String!
   image: String
+  melodies(where: MelodyWhereInput, orderBy: MelodyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Melody!]
 }
 
 type UserConnection {
@@ -64,6 +320,19 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
+  nickname: String!
+  password: String!
+  image: String
+  melodies: MelodyCreateManyWithoutCreatedByInput
+}
+
+input UserCreateOneWithoutMelodiesInput {
+  create: UserCreateWithoutMelodiesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutMelodiesInput {
   id: ID
   nickname: String!
   password: String!
@@ -115,12 +384,31 @@ input UserUpdateInput {
   nickname: String
   password: String
   image: String
+  melodies: MelodyUpdateManyWithoutCreatedByInput
 }
 
 input UserUpdateManyMutationInput {
   nickname: String
   password: String
   image: String
+}
+
+input UserUpdateOneRequiredWithoutMelodiesInput {
+  create: UserCreateWithoutMelodiesInput
+  update: UserUpdateWithoutMelodiesDataInput
+  upsert: UserUpsertWithoutMelodiesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutMelodiesDataInput {
+  nickname: String
+  password: String
+  image: String
+}
+
+input UserUpsertWithoutMelodiesInput {
+  update: UserUpdateWithoutMelodiesDataInput!
+  create: UserCreateWithoutMelodiesInput!
 }
 
 input UserWhereInput {
@@ -180,6 +468,9 @@ input UserWhereInput {
   image_not_starts_with: String
   image_ends_with: String
   image_not_ends_with: String
+  melodies_every: MelodyWhereInput
+  melodies_some: MelodyWhereInput
+  melodies_none: MelodyWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]

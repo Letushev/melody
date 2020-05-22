@@ -1,0 +1,50 @@
+@import 'styles/variables';
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: $l;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 648px) {
+    grid-template-columns: repeat(1, 1fr);
+  } 
+}
+
+.melody {
+  padding: $l;
+  border: 1px solid $tundora;
+  border-radius: $s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+
+  display: flex;
+  flex-direction: column;
+
+  transition: .3s linear;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .2);
+  }
+}
+
+.name {
+  margin: 0;
+  font-size: $big;
+}
+
+.by {
+  margin: $s 0 $m 0;
+  font-style: italic;
+}
+
+.createdAt {
+  margin: auto 0 0 0;
+  font-size: $small;
+  color: $silver;
+  align-self: flex-end;
+}

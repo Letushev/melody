@@ -16,6 +16,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
+  melody: (where?: MelodyWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -38,6 +39,25 @@ export interface Prisma {
    * Queries
    */
 
+  melody: (where: MelodyWhereUniqueInput) => MelodyNullablePromise;
+  melodies: (args?: {
+    where?: MelodyWhereInput;
+    orderBy?: MelodyOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Melody>;
+  melodiesConnection: (args?: {
+    where?: MelodyWhereInput;
+    orderBy?: MelodyOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => MelodyConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -63,6 +83,22 @@ export interface Prisma {
    * Mutations
    */
 
+  createMelody: (data: MelodyCreateInput) => MelodyPromise;
+  updateMelody: (args: {
+    data: MelodyUpdateInput;
+    where: MelodyWhereUniqueInput;
+  }) => MelodyPromise;
+  updateManyMelodies: (args: {
+    data: MelodyUpdateManyMutationInput;
+    where?: MelodyWhereInput;
+  }) => BatchPayloadPromise;
+  upsertMelody: (args: {
+    where: MelodyWhereUniqueInput;
+    create: MelodyCreateInput;
+    update: MelodyUpdateInput;
+  }) => MelodyPromise;
+  deleteMelody: (where: MelodyWhereUniqueInput) => MelodyPromise;
+  deleteManyMelodies: (where?: MelodyWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput;
@@ -88,6 +124,9 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  melody: (
+    where?: MelodySubscriptionWhereInput
+  ) => MelodySubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -101,6 +140,16 @@ export interface ClientConstructor<T> {
  * Types
  */
 
+export type MelodyOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "by_ASC"
+  | "by_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC";
+
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -113,10 +162,66 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type UserWhereUniqueInput = AtLeastOne<{
+export type MelodyWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
-  nickname?: Maybe<String>;
 }>;
+
+export interface MelodyWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  by?: Maybe<String>;
+  by_not?: Maybe<String>;
+  by_in?: Maybe<String[] | String>;
+  by_not_in?: Maybe<String[] | String>;
+  by_lt?: Maybe<String>;
+  by_lte?: Maybe<String>;
+  by_gt?: Maybe<String>;
+  by_gte?: Maybe<String>;
+  by_contains?: Maybe<String>;
+  by_not_contains?: Maybe<String>;
+  by_starts_with?: Maybe<String>;
+  by_not_starts_with?: Maybe<String>;
+  by_ends_with?: Maybe<String>;
+  by_not_ends_with?: Maybe<String>;
+  createdBy?: Maybe<UserWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<MelodyWhereInput[] | MelodyWhereInput>;
+  OR?: Maybe<MelodyWhereInput[] | MelodyWhereInput>;
+  NOT?: Maybe<MelodyWhereInput[] | MelodyWhereInput>;
+}
 
 export interface UserWhereInput {
   id?: Maybe<ID_Input>;
@@ -175,9 +280,65 @@ export interface UserWhereInput {
   image_not_starts_with?: Maybe<String>;
   image_ends_with?: Maybe<String>;
   image_not_ends_with?: Maybe<String>;
+  melodies_every?: Maybe<MelodyWhereInput>;
+  melodies_some?: Maybe<MelodyWhereInput>;
+  melodies_none?: Maybe<MelodyWhereInput>;
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
   OR?: Maybe<UserWhereInput[] | UserWhereInput>;
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  nickname?: Maybe<String>;
+}>;
+
+export interface MelodyCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  by: String;
+  createdBy: UserCreateOneWithoutMelodiesInput;
+}
+
+export interface UserCreateOneWithoutMelodiesInput {
+  create?: Maybe<UserCreateWithoutMelodiesInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserCreateWithoutMelodiesInput {
+  id?: Maybe<ID_Input>;
+  nickname: String;
+  password: String;
+  image?: Maybe<String>;
+}
+
+export interface MelodyUpdateInput {
+  name?: Maybe<String>;
+  by?: Maybe<String>;
+  createdBy?: Maybe<UserUpdateOneRequiredWithoutMelodiesInput>;
+}
+
+export interface UserUpdateOneRequiredWithoutMelodiesInput {
+  create?: Maybe<UserCreateWithoutMelodiesInput>;
+  update?: Maybe<UserUpdateWithoutMelodiesDataInput>;
+  upsert?: Maybe<UserUpsertWithoutMelodiesInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateWithoutMelodiesDataInput {
+  nickname?: Maybe<String>;
+  password?: Maybe<String>;
+  image?: Maybe<String>;
+}
+
+export interface UserUpsertWithoutMelodiesInput {
+  update: UserUpdateWithoutMelodiesDataInput;
+  create: UserCreateWithoutMelodiesInput;
+}
+
+export interface MelodyUpdateManyMutationInput {
+  name?: Maybe<String>;
+  by?: Maybe<String>;
 }
 
 export interface UserCreateInput {
@@ -185,18 +346,149 @@ export interface UserCreateInput {
   nickname: String;
   password: String;
   image?: Maybe<String>;
+  melodies?: Maybe<MelodyCreateManyWithoutCreatedByInput>;
+}
+
+export interface MelodyCreateManyWithoutCreatedByInput {
+  create?: Maybe<
+    MelodyCreateWithoutCreatedByInput[] | MelodyCreateWithoutCreatedByInput
+  >;
+  connect?: Maybe<MelodyWhereUniqueInput[] | MelodyWhereUniqueInput>;
+}
+
+export interface MelodyCreateWithoutCreatedByInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  by: String;
 }
 
 export interface UserUpdateInput {
   nickname?: Maybe<String>;
   password?: Maybe<String>;
   image?: Maybe<String>;
+  melodies?: Maybe<MelodyUpdateManyWithoutCreatedByInput>;
+}
+
+export interface MelodyUpdateManyWithoutCreatedByInput {
+  create?: Maybe<
+    MelodyCreateWithoutCreatedByInput[] | MelodyCreateWithoutCreatedByInput
+  >;
+  delete?: Maybe<MelodyWhereUniqueInput[] | MelodyWhereUniqueInput>;
+  connect?: Maybe<MelodyWhereUniqueInput[] | MelodyWhereUniqueInput>;
+  set?: Maybe<MelodyWhereUniqueInput[] | MelodyWhereUniqueInput>;
+  disconnect?: Maybe<MelodyWhereUniqueInput[] | MelodyWhereUniqueInput>;
+  update?: Maybe<
+    | MelodyUpdateWithWhereUniqueWithoutCreatedByInput[]
+    | MelodyUpdateWithWhereUniqueWithoutCreatedByInput
+  >;
+  upsert?: Maybe<
+    | MelodyUpsertWithWhereUniqueWithoutCreatedByInput[]
+    | MelodyUpsertWithWhereUniqueWithoutCreatedByInput
+  >;
+  deleteMany?: Maybe<MelodyScalarWhereInput[] | MelodyScalarWhereInput>;
+  updateMany?: Maybe<
+    | MelodyUpdateManyWithWhereNestedInput[]
+    | MelodyUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface MelodyUpdateWithWhereUniqueWithoutCreatedByInput {
+  where: MelodyWhereUniqueInput;
+  data: MelodyUpdateWithoutCreatedByDataInput;
+}
+
+export interface MelodyUpdateWithoutCreatedByDataInput {
+  name?: Maybe<String>;
+  by?: Maybe<String>;
+}
+
+export interface MelodyUpsertWithWhereUniqueWithoutCreatedByInput {
+  where: MelodyWhereUniqueInput;
+  update: MelodyUpdateWithoutCreatedByDataInput;
+  create: MelodyCreateWithoutCreatedByInput;
+}
+
+export interface MelodyScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  by?: Maybe<String>;
+  by_not?: Maybe<String>;
+  by_in?: Maybe<String[] | String>;
+  by_not_in?: Maybe<String[] | String>;
+  by_lt?: Maybe<String>;
+  by_lte?: Maybe<String>;
+  by_gt?: Maybe<String>;
+  by_gte?: Maybe<String>;
+  by_contains?: Maybe<String>;
+  by_not_contains?: Maybe<String>;
+  by_starts_with?: Maybe<String>;
+  by_not_starts_with?: Maybe<String>;
+  by_ends_with?: Maybe<String>;
+  by_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<MelodyScalarWhereInput[] | MelodyScalarWhereInput>;
+  OR?: Maybe<MelodyScalarWhereInput[] | MelodyScalarWhereInput>;
+  NOT?: Maybe<MelodyScalarWhereInput[] | MelodyScalarWhereInput>;
+}
+
+export interface MelodyUpdateManyWithWhereNestedInput {
+  where: MelodyScalarWhereInput;
+  data: MelodyUpdateManyDataInput;
+}
+
+export interface MelodyUpdateManyDataInput {
+  name?: Maybe<String>;
+  by?: Maybe<String>;
 }
 
 export interface UserUpdateManyMutationInput {
   nickname?: Maybe<String>;
   password?: Maybe<String>;
   image?: Maybe<String>;
+}
+
+export interface MelodySubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<MelodyWhereInput>;
+  AND?: Maybe<MelodySubscriptionWhereInput[] | MelodySubscriptionWhereInput>;
+  OR?: Maybe<MelodySubscriptionWhereInput[] | MelodySubscriptionWhereInput>;
+  NOT?: Maybe<MelodySubscriptionWhereInput[] | MelodySubscriptionWhereInput>;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -214,6 +506,41 @@ export interface NodeNode {
   id: ID_Output;
 }
 
+export interface Melody {
+  id: ID_Output;
+  name: String;
+  by: String;
+  createdAt: DateTimeOutput;
+}
+
+export interface MelodyPromise extends Promise<Melody>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  by: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+}
+
+export interface MelodySubscription
+  extends Promise<AsyncIterator<Melody>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  by: () => Promise<AsyncIterator<String>>;
+  createdBy: <T = UserSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface MelodyNullablePromise
+  extends Promise<Melody | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  by: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+}
+
 export interface User {
   id: ID_Output;
   nickname: String;
@@ -226,6 +553,15 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   nickname: () => Promise<String>;
   password: () => Promise<String>;
   image: () => Promise<String>;
+  melodies: <T = FragmentableArray<Melody>>(args?: {
+    where?: MelodyWhereInput;
+    orderBy?: MelodyOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface UserSubscription
@@ -235,6 +571,15 @@ export interface UserSubscription
   nickname: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   image: () => Promise<AsyncIterator<String>>;
+  melodies: <T = Promise<AsyncIterator<MelodySubscription>>>(args?: {
+    where?: MelodyWhereInput;
+    orderBy?: MelodyOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface UserNullablePromise
@@ -244,27 +589,36 @@ export interface UserNullablePromise
   nickname: () => Promise<String>;
   password: () => Promise<String>;
   image: () => Promise<String>;
+  melodies: <T = FragmentableArray<Melody>>(args?: {
+    where?: MelodyWhereInput;
+    orderBy?: MelodyOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface UserConnection {
+export interface MelodyConnection {
   pageInfo: PageInfo;
-  edges: UserEdge[];
+  edges: MelodyEdge[];
 }
 
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
+export interface MelodyConnectionPromise
+  extends Promise<MelodyConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
+  edges: <T = FragmentableArray<MelodyEdge>>() => T;
+  aggregate: <T = AggregateMelodyPromise>() => T;
 }
 
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
+export interface MelodyConnectionSubscription
+  extends Promise<AsyncIterator<MelodyConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MelodyEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMelodySubscription>() => T;
 }
 
 export interface PageInfo {
@@ -288,6 +642,60 @@ export interface PageInfoSubscription
   hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
   startCursor: () => Promise<AsyncIterator<String>>;
   endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface MelodyEdge {
+  node: Melody;
+  cursor: String;
+}
+
+export interface MelodyEdgePromise extends Promise<MelodyEdge>, Fragmentable {
+  node: <T = MelodyPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface MelodyEdgeSubscription
+  extends Promise<AsyncIterator<MelodyEdge>>,
+    Fragmentable {
+  node: <T = MelodySubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateMelody {
+  count: Int;
+}
+
+export interface AggregateMelodyPromise
+  extends Promise<AggregateMelody>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateMelodySubscription
+  extends Promise<AsyncIterator<AggregateMelody>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
 }
 
 export interface UserEdge {
@@ -337,6 +745,56 @@ export interface BatchPayloadSubscription
   extends Promise<AsyncIterator<BatchPayload>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface MelodySubscriptionPayload {
+  mutation: MutationType;
+  node: Melody;
+  updatedFields: String[];
+  previousValues: MelodyPreviousValues;
+}
+
+export interface MelodySubscriptionPayloadPromise
+  extends Promise<MelodySubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = MelodyPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = MelodyPreviousValuesPromise>() => T;
+}
+
+export interface MelodySubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<MelodySubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = MelodySubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = MelodyPreviousValuesSubscription>() => T;
+}
+
+export interface MelodyPreviousValues {
+  id: ID_Output;
+  name: String;
+  by: String;
+  createdAt: DateTimeOutput;
+}
+
+export interface MelodyPreviousValuesPromise
+  extends Promise<MelodyPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  by: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+}
+
+export interface MelodyPreviousValuesSubscription
+  extends Promise<AsyncIterator<MelodyPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  by: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -401,6 +859,16 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
+DateTime scalar input type, allowing Date
+*/
+export type DateTimeInput = Date | string;
+
+/*
+DateTime scalar output type, which is always a string
+*/
+export type DateTimeOutput = string;
+
+/*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
@@ -419,6 +887,10 @@ export type Long = string;
 export const models: Model[] = [
   {
     name: "User",
+    embedded: false
+  },
+  {
+    name: "Melody",
     embedded: false
   }
 ];

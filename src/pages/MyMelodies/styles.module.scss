@@ -1,0 +1,42 @@
+@import 'styles/variables';
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.empty {
+  text-align: center;
+}
+
+.emptyImage {
+  width: 320px;
+  height: 320px;
+
+  @media (max-width: 480px) {
+    width: 240px;
+    height: 240px;
+  }
+}
+
+.form {
+  max-width: 320px;
+  margin: $l auto;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  margin-left: $m;
+  @media (max-width: 400px) {
+    font-size: $small;
+  }
+}
+
+.input {
+  margin-bottom: $l;
+}

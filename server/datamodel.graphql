@@ -3,4 +3,13 @@ type User {
   nickname: String! @unique
   password: String!
   image: String
+  melodies: [Melody!]!
+}
+
+type Melody {
+  id: ID! @id
+  name: String!
+  by: String!
+  createdBy: User!
+  createdAt: DateTime! @createdAt
 }

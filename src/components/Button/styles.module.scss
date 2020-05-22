@@ -31,3 +31,20 @@
     background: $grenadier;
   }
 }
+
+.positive {
+  background: $green;
+
+  &:hover {
+    background: $seaGreen;
+  }
+}
+
+.small {
+  font-weight: normal;
+  font-size: 16px;
+  letter-spacing: normal;
+  border-radius: $xs;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+  padding: $s $m;
+}

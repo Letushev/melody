@@ -1,3 +1,5 @@
+scalar DateTime
+
 type Query {
   user: User
 }
@@ -7,15 +9,27 @@ type Mutation {
   login(nickname: String!, password: String!): AuthPayload
   deleteUser(id: ID!): User
   addUserImage(image: String!): User
+
+  createMelody(name: String!, by: String!): Melody
+  deleteMelody(id: ID!): Melody
 }
 
 type User {
   id: ID!
   nickname: String!
   image: String
+  melodies: [Melody!]!
 }
 
 type AuthPayload {
   user: User
   token: String
+}
+
+type Melody {
+  id: ID!
+  name: String!
+  by: String!
+  createdBy: User!
+  createdAt: DateTime!
 }

@@ -2,7 +2,7 @@
 $edge: 648px;
 
 .header {
-  padding: $s $l;
+  padding: $s 0;
 }
 
 .inner {
@@ -23,6 +23,7 @@ $edge: 648px;
     left: -100%;
     bottom: 0;
     background: #fff;
+    z-index: 999;
 
     &.sidebar {
       left: 0;
