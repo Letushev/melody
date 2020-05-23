@@ -9,7 +9,16 @@ async function getMelody(_, args, context) {
   return await context.prisma.melody({ id: args.id });
 }
 
+async function getMelodies(_, args, context) {
+  return await context.prisma.melodies({
+    where: {
+      public: true,
+    },
+  });
+}
+
 module.exports = {
   user,
   getMelody,
+  getMelodies,
 };

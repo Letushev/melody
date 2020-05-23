@@ -5,6 +5,7 @@ import Layout from 'components/Layout';
 import MyMelodies from 'pages/MyMelodies';
 import Profile from 'pages/Profile';
 import Melody from 'pages/Melody';
+import AllMelodies from 'pages/AllMelodies';
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
       </Route>
       <Route exact path="/melody/:id">
         <Layout content={Melody} />
+      </Route>
+      <Route exact path="/all-melodies">
+        <Layout content={AllMelodies} />
       </Route>
       <Redirect to="/signin" />
     </Switch>

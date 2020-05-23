@@ -3,6 +3,7 @@ scalar DateTime
 type Query {
   user: User,
   getMelody(id: ID!): Melody
+  getMelodies: [Melody!]!
 }
 
 type Mutation {
