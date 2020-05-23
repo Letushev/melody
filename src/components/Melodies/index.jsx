@@ -1,19 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { formatDate } from 'helpers';
+import cn from 'classnames';
 import styles from './styles.module.scss';
 
 export default function Melodies({ melodies }) {
-  const formatDate = date => {
-    const d = new Date(date);
-    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
-  };
   return (
     <div className={styles.container}>
       {
         melodies.map(melody => (
-          <div
+          <Link
+            to={`/melody/${melody.id}`}
             key={melody.id}
-            className={styles.melody}
+            className={cn(
+              styles.melody,
+              melody.level && styles[melody.level]
+            )}
           >
             <p className={styles.name}>
               {melody.name}
@@ -24,7 +27,7 @@ export default function Melodies({ melodies }) {
             <p className={styles.createdAt}>
               {formatDate(melody.createdAt)}
             </p>
-          </div>
+          </Link>
         ))
       }
     </div>

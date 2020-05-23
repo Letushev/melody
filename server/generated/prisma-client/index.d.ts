@@ -148,7 +148,15 @@ export type MelodyOrderByInput =
   | "by_ASC"
   | "by_DESC"
   | "createdAt_ASC"
-  | "createdAt_DESC";
+  | "createdAt_DESC"
+  | "public_ASC"
+  | "public_DESC"
+  | "level_ASC"
+  | "level_DESC"
+  | "likes_ASC"
+  | "likes_DESC"
+  | "tabs_ASC"
+  | "tabs_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -218,6 +226,44 @@ export interface MelodyWhereInput {
   createdAt_lte?: Maybe<DateTimeInput>;
   createdAt_gt?: Maybe<DateTimeInput>;
   createdAt_gte?: Maybe<DateTimeInput>;
+  public?: Maybe<Boolean>;
+  public_not?: Maybe<Boolean>;
+  level?: Maybe<String>;
+  level_not?: Maybe<String>;
+  level_in?: Maybe<String[] | String>;
+  level_not_in?: Maybe<String[] | String>;
+  level_lt?: Maybe<String>;
+  level_lte?: Maybe<String>;
+  level_gt?: Maybe<String>;
+  level_gte?: Maybe<String>;
+  level_contains?: Maybe<String>;
+  level_not_contains?: Maybe<String>;
+  level_starts_with?: Maybe<String>;
+  level_not_starts_with?: Maybe<String>;
+  level_ends_with?: Maybe<String>;
+  level_not_ends_with?: Maybe<String>;
+  likes?: Maybe<Int>;
+  likes_not?: Maybe<Int>;
+  likes_in?: Maybe<Int[] | Int>;
+  likes_not_in?: Maybe<Int[] | Int>;
+  likes_lt?: Maybe<Int>;
+  likes_lte?: Maybe<Int>;
+  likes_gt?: Maybe<Int>;
+  likes_gte?: Maybe<Int>;
+  tabs?: Maybe<String>;
+  tabs_not?: Maybe<String>;
+  tabs_in?: Maybe<String[] | String>;
+  tabs_not_in?: Maybe<String[] | String>;
+  tabs_lt?: Maybe<String>;
+  tabs_lte?: Maybe<String>;
+  tabs_gt?: Maybe<String>;
+  tabs_gte?: Maybe<String>;
+  tabs_contains?: Maybe<String>;
+  tabs_not_contains?: Maybe<String>;
+  tabs_starts_with?: Maybe<String>;
+  tabs_not_starts_with?: Maybe<String>;
+  tabs_ends_with?: Maybe<String>;
+  tabs_not_ends_with?: Maybe<String>;
   AND?: Maybe<MelodyWhereInput[] | MelodyWhereInput>;
   OR?: Maybe<MelodyWhereInput[] | MelodyWhereInput>;
   NOT?: Maybe<MelodyWhereInput[] | MelodyWhereInput>;
@@ -298,6 +344,10 @@ export interface MelodyCreateInput {
   name: String;
   by: String;
   createdBy: UserCreateOneWithoutMelodiesInput;
+  public: Boolean;
+  level?: Maybe<String>;
+  likes?: Maybe<Int>;
+  tabs?: Maybe<String>;
 }
 
 export interface UserCreateOneWithoutMelodiesInput {
@@ -316,6 +366,10 @@ export interface MelodyUpdateInput {
   name?: Maybe<String>;
   by?: Maybe<String>;
   createdBy?: Maybe<UserUpdateOneRequiredWithoutMelodiesInput>;
+  public?: Maybe<Boolean>;
+  level?: Maybe<String>;
+  likes?: Maybe<Int>;
+  tabs?: Maybe<String>;
 }
 
 export interface UserUpdateOneRequiredWithoutMelodiesInput {
@@ -339,6 +393,10 @@ export interface UserUpsertWithoutMelodiesInput {
 export interface MelodyUpdateManyMutationInput {
   name?: Maybe<String>;
   by?: Maybe<String>;
+  public?: Maybe<Boolean>;
+  level?: Maybe<String>;
+  likes?: Maybe<Int>;
+  tabs?: Maybe<String>;
 }
 
 export interface UserCreateInput {
@@ -360,6 +418,10 @@ export interface MelodyCreateWithoutCreatedByInput {
   id?: Maybe<ID_Input>;
   name: String;
   by: String;
+  public: Boolean;
+  level?: Maybe<String>;
+  likes?: Maybe<Int>;
+  tabs?: Maybe<String>;
 }
 
 export interface UserUpdateInput {
@@ -400,6 +462,10 @@ export interface MelodyUpdateWithWhereUniqueWithoutCreatedByInput {
 export interface MelodyUpdateWithoutCreatedByDataInput {
   name?: Maybe<String>;
   by?: Maybe<String>;
+  public?: Maybe<Boolean>;
+  level?: Maybe<String>;
+  likes?: Maybe<Int>;
+  tabs?: Maybe<String>;
 }
 
 export interface MelodyUpsertWithWhereUniqueWithoutCreatedByInput {
@@ -459,6 +525,44 @@ export interface MelodyScalarWhereInput {
   createdAt_lte?: Maybe<DateTimeInput>;
   createdAt_gt?: Maybe<DateTimeInput>;
   createdAt_gte?: Maybe<DateTimeInput>;
+  public?: Maybe<Boolean>;
+  public_not?: Maybe<Boolean>;
+  level?: Maybe<String>;
+  level_not?: Maybe<String>;
+  level_in?: Maybe<String[] | String>;
+  level_not_in?: Maybe<String[] | String>;
+  level_lt?: Maybe<String>;
+  level_lte?: Maybe<String>;
+  level_gt?: Maybe<String>;
+  level_gte?: Maybe<String>;
+  level_contains?: Maybe<String>;
+  level_not_contains?: Maybe<String>;
+  level_starts_with?: Maybe<String>;
+  level_not_starts_with?: Maybe<String>;
+  level_ends_with?: Maybe<String>;
+  level_not_ends_with?: Maybe<String>;
+  likes?: Maybe<Int>;
+  likes_not?: Maybe<Int>;
+  likes_in?: Maybe<Int[] | Int>;
+  likes_not_in?: Maybe<Int[] | Int>;
+  likes_lt?: Maybe<Int>;
+  likes_lte?: Maybe<Int>;
+  likes_gt?: Maybe<Int>;
+  likes_gte?: Maybe<Int>;
+  tabs?: Maybe<String>;
+  tabs_not?: Maybe<String>;
+  tabs_in?: Maybe<String[] | String>;
+  tabs_not_in?: Maybe<String[] | String>;
+  tabs_lt?: Maybe<String>;
+  tabs_lte?: Maybe<String>;
+  tabs_gt?: Maybe<String>;
+  tabs_gte?: Maybe<String>;
+  tabs_contains?: Maybe<String>;
+  tabs_not_contains?: Maybe<String>;
+  tabs_starts_with?: Maybe<String>;
+  tabs_not_starts_with?: Maybe<String>;
+  tabs_ends_with?: Maybe<String>;
+  tabs_not_ends_with?: Maybe<String>;
   AND?: Maybe<MelodyScalarWhereInput[] | MelodyScalarWhereInput>;
   OR?: Maybe<MelodyScalarWhereInput[] | MelodyScalarWhereInput>;
   NOT?: Maybe<MelodyScalarWhereInput[] | MelodyScalarWhereInput>;
@@ -472,6 +576,10 @@ export interface MelodyUpdateManyWithWhereNestedInput {
 export interface MelodyUpdateManyDataInput {
   name?: Maybe<String>;
   by?: Maybe<String>;
+  public?: Maybe<Boolean>;
+  level?: Maybe<String>;
+  likes?: Maybe<Int>;
+  tabs?: Maybe<String>;
 }
 
 export interface UserUpdateManyMutationInput {
@@ -511,6 +619,10 @@ export interface Melody {
   name: String;
   by: String;
   createdAt: DateTimeOutput;
+  public: Boolean;
+  level?: String;
+  likes?: Int;
+  tabs?: String;
 }
 
 export interface MelodyPromise extends Promise<Melody>, Fragmentable {
@@ -519,6 +631,10 @@ export interface MelodyPromise extends Promise<Melody>, Fragmentable {
   by: () => Promise<String>;
   createdBy: <T = UserPromise>() => T;
   createdAt: () => Promise<DateTimeOutput>;
+  public: () => Promise<Boolean>;
+  level: () => Promise<String>;
+  likes: () => Promise<Int>;
+  tabs: () => Promise<String>;
 }
 
 export interface MelodySubscription
@@ -529,6 +645,10 @@ export interface MelodySubscription
   by: () => Promise<AsyncIterator<String>>;
   createdBy: <T = UserSubscription>() => T;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  public: () => Promise<AsyncIterator<Boolean>>;
+  level: () => Promise<AsyncIterator<String>>;
+  likes: () => Promise<AsyncIterator<Int>>;
+  tabs: () => Promise<AsyncIterator<String>>;
 }
 
 export interface MelodyNullablePromise
@@ -539,6 +659,10 @@ export interface MelodyNullablePromise
   by: () => Promise<String>;
   createdBy: <T = UserPromise>() => T;
   createdAt: () => Promise<DateTimeOutput>;
+  public: () => Promise<Boolean>;
+  level: () => Promise<String>;
+  likes: () => Promise<Int>;
+  tabs: () => Promise<String>;
 }
 
 export interface User {
@@ -777,6 +901,10 @@ export interface MelodyPreviousValues {
   name: String;
   by: String;
   createdAt: DateTimeOutput;
+  public: Boolean;
+  level?: String;
+  likes?: Int;
+  tabs?: String;
 }
 
 export interface MelodyPreviousValuesPromise
@@ -786,6 +914,10 @@ export interface MelodyPreviousValuesPromise
   name: () => Promise<String>;
   by: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
+  public: () => Promise<Boolean>;
+  level: () => Promise<String>;
+  likes: () => Promise<Int>;
+  tabs: () => Promise<String>;
 }
 
 export interface MelodyPreviousValuesSubscription
@@ -795,6 +927,10 @@ export interface MelodyPreviousValuesSubscription
   name: () => Promise<AsyncIterator<String>>;
   by: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  public: () => Promise<AsyncIterator<Boolean>>;
+  level: () => Promise<AsyncIterator<String>>;
+  likes: () => Promise<AsyncIterator<Int>>;
+  tabs: () => Promise<AsyncIterator<String>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -869,14 +1005,14 @@ DateTime scalar output type, which is always a string
 export type DateTimeOutput = string;
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-*/
-export type Int = number;
-
-/*
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+*/
+export type Int = number;
 
 export type Long = string;
 

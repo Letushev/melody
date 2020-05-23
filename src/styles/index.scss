@@ -24,4 +24,9 @@ body {
   margin-right: auto;
   padding-left: $l;
   padding-right: $l;
+
+  @media (max-width: 480px) {
+    padding-left: $m;
+    padding-right: $m;
+  }
 }

@@ -16,6 +16,7 @@ export default function MyMelodies() {
 
   const [newMelody, setNewMelody] = useState(initialMelody);
   const [melodies, setMelodies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchGQL({
@@ -23,6 +24,7 @@ export default function MyMelodies() {
     })
       .then(({ data }) => {
         setMelodies(data.user.melodies);
+        setIsLoading(false);
       });
   }, []);
 
@@ -42,6 +44,10 @@ export default function MyMelodies() {
         setMelodies(melodiesUpdated);
       });
   };
+
+  if (isLoading) {
+    return null;
+  }
 
   if (newMelody.isAdding) {
     content = (

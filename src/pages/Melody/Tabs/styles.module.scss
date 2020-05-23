@@ -1,0 +1,39 @@
+@import 'styles/variables';
+
+.container {
+  margin-top: $l;
+}
+
+.canvas {
+  cursor: pointer;
+}
+
+.plus {
+  display: block;
+  width: $l;
+  margin: $m auto;
+  fill: #9CCC65;
+  cursor: pointer;
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+
+  svg {
+    width: $l;
+    height: $l;
+    margin-left: $l;
+    cursor: pointer;
+
+    &.saveSvg {
+      fill: $green;
+      width: 18px;
+    }
+
+    &.closeSvg {
+      fill: $red;
+      width: 18px;
+    }
+  }
+}

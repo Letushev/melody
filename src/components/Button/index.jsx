@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 export default function Button({ 
   children, auto, negative,
   positive, small, extraStyles,
-  ...props 
+  neutral, ...props 
 }) {
   return (
     <button
@@ -16,6 +16,7 @@ export default function Button({
         negative && styles.negative,
         positive && styles.positive,
         small && styles.small,
+        neutral && styles.neutral,
         extraStyles && extraStyles,
       )}
       {...props}
@@ -32,6 +33,7 @@ Button.propTypes = {
   positive: PropTypes.bool,
   small: PropTypes.bool,
   extraStyles: PropTypes.string,
+  neutral: PropTypes.bool,
 };
 
 Button.defaultProps = {
@@ -40,4 +42,5 @@ Button.defaultProps = {
   positive: false,
   small: false,
   extraStyles: '',
+  neutral: false,
 };

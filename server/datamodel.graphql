@@ -12,4 +12,8 @@ type Melody {
   by: String!
   createdBy: User!
   createdAt: DateTime! @createdAt
+  public: Boolean!
+  level: String
+  likes: Int
+  tabs: String
 }

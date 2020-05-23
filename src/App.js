@@ -4,6 +4,7 @@ import Auth from 'pages/Auth';
 import Layout from 'components/Layout';
 import MyMelodies from 'pages/MyMelodies';
 import Profile from 'pages/Profile';
+import Melody from 'pages/Melody';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
       </Route>
       <Route exact path="/profile">
         <Layout content={Profile} />
+      </Route>
+      <Route exact path="/melody/:id">
+        <Layout content={Melody} />
       </Route>
       <Redirect to="/signin" />
     </Switch>

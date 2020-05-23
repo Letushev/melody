@@ -1,0 +1,79 @@
+@import 'styles/variables';
+
+.header {
+  position: relative;
+  background: $gray;
+  border-radius: $s;
+  padding: $m $l;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .15);
+  margin-bottom: $m;
+}
+
+.name {
+  text-align: center;
+  margin: 0;
+}
+
+.by {
+  text-align: center;
+  font-style: italic;
+  margin: $s 0 0 0;
+}
+
+.createdAt {
+  position: absolute;
+  bottom: $s;
+  right: $s;
+  font-size: $small;
+  color: $silver;
+
+  @media (max-width: 480px) {
+    position: unset;
+  }
+}
+
+.createdBy {
+  position: absolute;
+  left: $s;
+  bottom: $s;
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 480px) {
+    position: unset;
+    margin: $s 0;
+  }
+}
+
+.createdByImage {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.createdByNickname {
+  font-size: $medium;
+  margin-left: $s;
+}
+
+.settings {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: $s;
+  right: $s;
+  cursor: pointer;
+}
+
+.low {
+  background: #E8F5E9;
+}
+
+.medium {
+  background: #FFF3E0;
+}
+
+.hard {
+  background: #FFEBEE;
+}

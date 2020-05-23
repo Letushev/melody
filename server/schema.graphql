@@ -1,7 +1,8 @@
 scalar DateTime
 
 type Query {
-  user: User
+  user: User,
+  getMelody(id: ID!): Melody
 }
 
 type Mutation {
@@ -12,6 +13,8 @@ type Mutation {
 
   createMelody(name: String!, by: String!): Melody
   deleteMelody(id: ID!): Melody
+  updateMelody(id: ID!, name: String, by: String, level: String, public: Boolean): Melody
+  editMelodyTabs(id: ID!, tabs: String!): Melody
 }
 
 type User {
@@ -32,4 +35,8 @@ type Melody {
   by: String!
   createdBy: User!
   createdAt: DateTime!
+  public: Boolean!
+  level: String
+  likes: Int
+  tabs: String
 }

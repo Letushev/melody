@@ -25,6 +25,10 @@ type Melody {
   by: String!
   createdBy: User!
   createdAt: DateTime!
+  public: Boolean!
+  level: String
+  likes: Int
+  tabs: String
 }
 
 type MelodyConnection {
@@ -38,6 +42,10 @@ input MelodyCreateInput {
   name: String!
   by: String!
   createdBy: UserCreateOneWithoutMelodiesInput!
+  public: Boolean!
+  level: String
+  likes: Int
+  tabs: String
 }
 
 input MelodyCreateManyWithoutCreatedByInput {
@@ -49,6 +57,10 @@ input MelodyCreateWithoutCreatedByInput {
   id: ID
   name: String!
   by: String!
+  public: Boolean!
+  level: String
+  likes: Int
+  tabs: String
 }
 
 type MelodyEdge {
@@ -65,6 +77,14 @@ enum MelodyOrderByInput {
   by_DESC
   createdAt_ASC
   createdAt_DESC
+  public_ASC
+  public_DESC
+  level_ASC
+  level_DESC
+  likes_ASC
+  likes_DESC
+  tabs_ASC
+  tabs_DESC
 }
 
 type MelodyPreviousValues {
@@ -72,6 +92,10 @@ type MelodyPreviousValues {
   name: String!
   by: String!
   createdAt: DateTime!
+  public: Boolean!
+  level: String
+  likes: Int
+  tabs: String
 }
 
 input MelodyScalarWhereInput {
@@ -125,6 +149,44 @@ input MelodyScalarWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
+  public: Boolean
+  public_not: Boolean
+  level: String
+  level_not: String
+  level_in: [String!]
+  level_not_in: [String!]
+  level_lt: String
+  level_lte: String
+  level_gt: String
+  level_gte: String
+  level_contains: String
+  level_not_contains: String
+  level_starts_with: String
+  level_not_starts_with: String
+  level_ends_with: String
+  level_not_ends_with: String
+  likes: Int
+  likes_not: Int
+  likes_in: [Int!]
+  likes_not_in: [Int!]
+  likes_lt: Int
+  likes_lte: Int
+  likes_gt: Int
+  likes_gte: Int
+  tabs: String
+  tabs_not: String
+  tabs_in: [String!]
+  tabs_not_in: [String!]
+  tabs_lt: String
+  tabs_lte: String
+  tabs_gt: String
+  tabs_gte: String
+  tabs_contains: String
+  tabs_not_contains: String
+  tabs_starts_with: String
+  tabs_not_starts_with: String
+  tabs_ends_with: String
+  tabs_not_ends_with: String
   AND: [MelodyScalarWhereInput!]
   OR: [MelodyScalarWhereInput!]
   NOT: [MelodyScalarWhereInput!]
@@ -152,16 +214,28 @@ input MelodyUpdateInput {
   name: String
   by: String
   createdBy: UserUpdateOneRequiredWithoutMelodiesInput
+  public: Boolean
+  level: String
+  likes: Int
+  tabs: String
 }
 
 input MelodyUpdateManyDataInput {
   name: String
   by: String
+  public: Boolean
+  level: String
+  likes: Int
+  tabs: String
 }
 
 input MelodyUpdateManyMutationInput {
   name: String
   by: String
+  public: Boolean
+  level: String
+  likes: Int
+  tabs: String
 }
 
 input MelodyUpdateManyWithoutCreatedByInput {
@@ -184,6 +258,10 @@ input MelodyUpdateManyWithWhereNestedInput {
 input MelodyUpdateWithoutCreatedByDataInput {
   name: String
   by: String
+  public: Boolean
+  level: String
+  likes: Int
+  tabs: String
 }
 
 input MelodyUpdateWithWhereUniqueWithoutCreatedByInput {
@@ -249,6 +327,44 @@ input MelodyWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
+  public: Boolean
+  public_not: Boolean
+  level: String
+  level_not: String
+  level_in: [String!]
+  level_not_in: [String!]
+  level_lt: String
+  level_lte: String
+  level_gt: String
+  level_gte: String
+  level_contains: String
+  level_not_contains: String
+  level_starts_with: String
+  level_not_starts_with: String
+  level_ends_with: String
+  level_not_ends_with: String
+  likes: Int
+  likes_not: Int
+  likes_in: [Int!]
+  likes_not_in: [Int!]
+  likes_lt: Int
+  likes_lte: Int
+  likes_gt: Int
+  likes_gte: Int
+  tabs: String
+  tabs_not: String
+  tabs_in: [String!]
+  tabs_not_in: [String!]
+  tabs_lt: String
+  tabs_lte: String
+  tabs_gt: String
+  tabs_gte: String
+  tabs_contains: String
+  tabs_not_contains: String
+  tabs_starts_with: String
+  tabs_not_starts_with: String
+  tabs_ends_with: String
+  tabs_not_ends_with: String
   AND: [MelodyWhereInput!]
   OR: [MelodyWhereInput!]
   NOT: [MelodyWhereInput!]

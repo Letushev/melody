@@ -19,6 +19,7 @@ export const getMelodies = gql`
         name
         by
         createdAt
+        level
       }
     }
   }

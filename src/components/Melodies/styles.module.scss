@@ -16,19 +16,22 @@
 
 .melody {
   padding: $l;
-  border: 1px solid $tundora;
+  background: $gray;
   border-radius: $s;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .15);
 
   display: flex;
   flex-direction: column;
+
+  color: $mineShaft;
+  text-decoration: none;
 
   transition: .3s linear;
   cursor: pointer;
 
   &:hover {
     transform: scale(1.1);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, .2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
   }
 }
 
@@ -47,4 +50,16 @@
   font-size: $small;
   color: $silver;
   align-self: flex-end;
+}
+
+.low {
+  background: #E8F5E9;
+}
+
+.medium {
+  background: #FFF3E0;
+}
+
+.hard {
+  background: #FFEBEE;
 }
