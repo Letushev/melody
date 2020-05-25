@@ -76,7 +76,6 @@ export default function Tabs({ tabs: initialTabs, canEdit, onSave }) {
   }
 
   const onMouseMove = event => {
-    console.log(isEditing);
     if (!isEditing) {
       return;
     }

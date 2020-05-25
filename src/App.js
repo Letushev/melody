@@ -23,12 +23,12 @@ function App() {
         <Layout content={Profile} />
       </Route>
       <Route exact path="/melody/:id">
-        <Layout content={Melody} />
+        <Layout content={Melody} authProtected={false} />
       </Route>
-      <Route exact path="/all-melodies">
-        <Layout content={AllMelodies} />
+      <Route exact path="/">
+        <Layout content={AllMelodies} authProtected={false} />
       </Route>
-      <Redirect to="/signin" />
+      <Redirect to="/" />
     </Switch>
   );
 }

@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import Header from 'components/Header';
 
 export default function Layout({ content: Content, authProtected }) {
-  if (authProtected && !localStorage.getItem('authToken')) {
+  const isAuth = !!localStorage.getItem('authToken');
+  if (authProtected && !isAuth) {
     return <Redirect to="/auth" />;
   }
 
   return (
     <>
-      <Header />
+      <Header isAuth={isAuth} />
       <div className="maxWidth">
         <Content />
       </div>

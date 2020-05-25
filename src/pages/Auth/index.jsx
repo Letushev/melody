@@ -5,6 +5,7 @@ import Name from 'components/Name';
 import Input from 'components/Input';
 import Button from 'components/Button';
 import { fetchGQL } from 'api';
+import { NavLink } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { isPasswordCorrect } from './helpers';
 import * as gql from './gql';
@@ -84,7 +85,9 @@ export default function Auth({ signup }) {
   return (
     <div className={styles.container}>
       <div className={styles.auth}>
-        <Name />
+        <NavLink to="/" className={styles.name}>
+          <Name />
+        </NavLink>
         <form
           className={styles.form}
           onSubmit={onSubmitForm}

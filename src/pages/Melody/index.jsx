@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { fetchGQL } from 'api';
 import { formatDate } from 'helpers';
 import { ReactComponent as SettingsSVG } from 'images/settings.svg';
+import { ReactComponent as ProfileSVG } from 'images/profile.svg';
 import cn from 'classnames';
 import Settings from './Settings';
 import Tabs from './Tabs';
@@ -32,7 +33,11 @@ export default function Melody() {
     ])
       .then(([userData, melodyData]) => {
         const { getMelody } = melodyData.data;
-        setUserId(userData.data.user.id);
+
+        if (userData.data.user) {
+          setUserId(userData.data.user.id);
+        }
+        
         setMelody({
           ...getMelody,
           createdAt: formatDate(getMelody.createdAt),
@@ -104,10 +109,11 @@ export default function Melody() {
           )
         }
         <div className={styles.createdBy}>
-          <img
-            src={melody.createdBy.image}
-            className={styles.createdByImage}
-          />
+          {
+            melody.createdBy.image
+              ? <img src={melody.createdBy.image} className={styles.createdByImage} />
+              : <ProfileSVG className={styles.createdByImage} />
+          }
           <span className={styles.createdByNickname}>
             {melody.createdBy.nickname}
           </span>

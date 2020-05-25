@@ -6,11 +6,14 @@ import { ReactComponent as MenuSVG } from 'images/menu.svg';
 import { ReactComponent as CloseSVG } from 'images/close.svg';
 import styles from './styles.module.scss';
 
-export default function Header() {
-  const nav = [
+export default function Header({ isAuth }) {
+  const nav = isAuth ? [
     { link: '/all-melodies', label: 'Усі мелодії' },
     { link: '/my-melodies', label: 'Мої мелодії' },
     { link: '/profile', label: 'Профіль' },
+  ] : [
+    { link: '/', label: 'Усі мелодії' },
+    { link: '/signin', label: 'Авторизація' },
   ];
 
   const [sidebar, setSidebar] = useState(false);
