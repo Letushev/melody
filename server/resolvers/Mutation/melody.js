@@ -24,7 +24,7 @@ async function updateMelody(_, args, context) {
     data: {
       ...name && { name },
       ...by && { by },
-      ...public && { public },
+      ...public !== undefined && { public },
       ...level && { level },
     },
     where: {
