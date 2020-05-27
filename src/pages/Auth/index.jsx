@@ -85,7 +85,7 @@ export default function Auth({ signup }) {
   return (
     <div className={styles.container}>
       <div className={styles.auth}>
-        <NavLink to="/" className={styles.name}>
+        <NavLink exact to="/" className={styles.name}>
           <Name />
         </NavLink>
         <form

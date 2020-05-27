@@ -8,7 +8,7 @@ import styles from './styles.module.scss';
 
 export default function Header({ isAuth }) {
   const nav = isAuth ? [
-    { link: '/all-melodies', label: 'Усі мелодії' },
+    { link: '/', label: 'Усі мелодії' },
     { link: '/my-melodies', label: 'Мої мелодії' },
     { link: '/profile', label: 'Профіль' },
   ] : [
@@ -43,6 +43,7 @@ export default function Header({ isAuth }) {
               nav.map(el => (
                 <li key={el.link}>
                   <NavLink
+                    exact
                     to={el.link}
                     className={styles.link}
                     activeClassName={styles.activeLink}

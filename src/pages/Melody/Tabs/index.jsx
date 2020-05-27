@@ -26,6 +26,10 @@ export default function Tabs({ tabs: initialTabs, canEdit, onSave }) {
 
   useEffect(() => {
     document.addEventListener('keyup', onKeyUp);
+
+    return () => {
+      document.removeEventListener('keyup', onKeyUp);
+    }
   }, []);
 
   const setSize = () => {
