@@ -3,6 +3,7 @@ import { fetchGQL } from 'api';
 import Melodies from 'components/Melodies';
 import localforage from 'localforage';
 import * as gql from './gql';
+import Search from './Search';
 
 export default function AllMelodies() {
   const [melodies, setMelodies] = useState(null);
@@ -38,9 +39,19 @@ export default function AllMelodies() {
       })
   }, []);
 
+  const onSearch = text => {
+    fetchGQL({
+      operation: gql.searchMelodies,
+      text,
+    }).then(({ data }) => {
+      setMelodies(data.searchMelodies);
+    })
+  }
+
   return (
     <>
       <h1>Усі мелодії</h1>
+      <Search search={onSearch} />
       { melodies && <Melodies melodies={melodies} /> }
     </>
   );

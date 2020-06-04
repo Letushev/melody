@@ -17,8 +17,24 @@ async function getMelodies(_, args, context) {
   });
 }
 
+async function searchMelodies(_, args, context) {
+  return await context.prisma.melodies({
+    where: {
+      OR: [
+        {
+          name_contains: args.text
+        },
+        {
+          by_contains: args.text
+        }
+      ]
+    }
+  });
+}
+
 module.exports = {
   user,
   getMelody,
   getMelodies,
+  searchMelodies,
 };

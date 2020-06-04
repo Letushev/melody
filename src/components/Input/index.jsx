@@ -13,15 +13,19 @@ export default function Input({
       containerStyles,
       styles.container
     )}>
-      <label
-        className={cn(
-          styles.label,
-          invalid && styles.invalid
-        )}
-        htmlFor={name}
-      >
-        {label}
-      </label>
+      { 
+        !!label && (
+          <label
+            className={cn(
+              styles.label,
+              invalid && styles.invalid
+            )}
+            htmlFor={name}
+          >
+            {label}
+          </label>
+        )
+      }
       <input
         className={cn(
           styles.input,

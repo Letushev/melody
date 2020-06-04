@@ -11,3 +11,15 @@ export const getMelodies = gql`
     }
   }
 `;
+
+export const searchMelodies = gql`
+  query searchMelodies($text: String!) {
+    searchMelodies(text: $text) {
+      id
+      name
+      by
+      createdAt
+      level
+    }
+  }
+`;

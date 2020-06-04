@@ -1,0 +1,12 @@
+@import 'styles/variables';
+
+.searchContainer {
+  margin-bottom: $l;
+  display: flex;
+  align-items: center;
+}
+
+.searchInput {
+  flex-grow: 1;
+  margin-right: $m;
+}
