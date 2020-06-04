@@ -48,6 +48,7 @@ export default function Settings({ melody: initialMelody, saveSettings, cancelSe
           name="name"
           placeholder="Назва мелодії"
         />
+        <br />
         <Input
           value={melody.by}
           onChange={text => setMelody({ ...melody, by: text })}

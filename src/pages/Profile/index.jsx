@@ -60,7 +60,7 @@ export default function Profile() {
         negative
         onClick={() => {
           localStorage.removeItem('authToken');
-          history.push('/auth');
+          history.push('/signin');
         }}
       >
         Вийти

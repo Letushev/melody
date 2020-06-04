@@ -2,18 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { fetchGQL } from 'api';
 import Melodies from 'components/Melodies';
 import localforage from 'localforage';
+import Button from 'components/Button';
 import * as gql from './gql';
 import Search from './Search';
+import styles from './styles.module.scss';
 
 export default function AllMelodies() {
   const [melodies, setMelodies] = useState(null);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     fetchGQL({
-      operation: gql.getMelodies
+      operation: gql.getMelodies,
+      first: 10,
     }).then(({ data }) => {
-      setMelodies(data.getMelodies);
-      localforage.setItem('all-melodies', data.getMelodies.map(m => m.id))
+      setMelodies(data.getMelodies.melodies);
+      setCount(data.getMelodies.count);
+      localforage.setItem('all-melodies', data.getMelodies.melodies.map(m => m.id));
     })
       .catch(() => {
         localforage.getItem('all-melodies', (_, list) => {
@@ -41,18 +46,45 @@ export default function AllMelodies() {
 
   const onSearch = text => {
     fetchGQL({
-      operation: gql.searchMelodies,
+      operation: gql.getMelodies,
       text,
     }).then(({ data }) => {
-      setMelodies(data.searchMelodies);
+      setMelodies(data.getMelodies.melodies);
+      setCount(data.getMelodies.count);
     })
+  };
+
+  const getMoreMelodies = () => {
+    fetchGQL({
+      operation: gql.getMelodies,
+      first: 10,
+      skip: melodies.length,
+    }).then(({ data }) => {
+      const more = data.getMelodies.melodies;
+      setMelodies([
+        ...melodies,
+        ...more,
+      ]);
+    });
   }
 
   return (
     <>
       <h1>Усі мелодії</h1>
       <Search search={onSearch} />
+      { melodies && <p>Знайдено <b>{count}</b> мелодій (відображено <b>{melodies.length}</b>)</p> }
       { melodies && <Melodies melodies={melodies} /> }
+      {
+        melodies && count > melodies.length && (
+          <Button
+            auto
+            extraStyles={styles.moreButton}
+            onClick={getMoreMelodies}
+          >
+            Завантажити ще
+          </Button>
+        )
+      }
     </>
   );
 }

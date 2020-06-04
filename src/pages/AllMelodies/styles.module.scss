@@ -10,3 +10,17 @@
   flex-grow: 1;
   margin-right: $m;
 }
+
+.moreButton {
+  display: block;
+  margin: 0 auto $xl auto;
+  background: none;
+  color: $mineShaft;
+  border: 1px solid $mineShaft;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+
+  &:hover {
+    background: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .2);
+  }
+}

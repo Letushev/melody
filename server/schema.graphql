@@ -3,8 +3,7 @@ scalar DateTime
 type Query {
   user: User,
   getMelody(id: ID!): Melody
-  getMelodies: [Melody!]!
-  searchMelodies(text: String!): [Melody!]!
+  getMelodies(text: String, skip: Int, first: Int): Melodies!
 }
 
 type Mutation {
@@ -41,4 +40,9 @@ type Melody {
   level: String
   likes: Int
   tabs: String
+}
+
+type Melodies {
+  melodies: [Melody!]!
+  count: Int!
 }

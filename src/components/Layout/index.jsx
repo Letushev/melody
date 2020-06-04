@@ -6,7 +6,7 @@ import Header from 'components/Header';
 export default function Layout({ content: Content, authProtected }) {
   const isAuth = !!localStorage.getItem('authToken');
   if (authProtected && !isAuth) {
-    return <Redirect to="/auth" />;
+    return <Redirect to="/signin" />;
   }
 
   return (

@@ -10,31 +10,40 @@ async function getMelody(_, args, context) {
 }
 
 async function getMelodies(_, args, context) {
-  return await context.prisma.melodies({
-    where: {
-      public: true,
-    },
-  });
-}
+  const where = {
+    public: true,
+  };
 
-async function searchMelodies(_, args, context) {
-  return await context.prisma.melodies({
-    where: {
-      OR: [
-        {
-          name_contains: args.text
-        },
-        {
-          by_contains: args.text
-        }
-      ]
-    }
+  if (args.text) {
+    where.OR = [
+      {
+        name_contains: args.text
+      },
+      {
+        by_contains: args.text
+      }
+    ];
+  }
+
+  const count = await context.prisma
+    .melodiesConnection({ where })
+    .aggregate()
+    .count()
+
+  const melodies = await context.prisma.melodies({
+    where,
+    skip: args.skip,
+    first: args.first,
   });
+
+  return {
+    melodies,
+    count,
+  }
 }
 
 module.exports = {
   user,
   getMelody,
   getMelodies,
-  searchMelodies,
 };
